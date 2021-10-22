@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <title>The Platform Ticket Collecter</title>
+</head>
+
+<body>
+  <h1>The Platform Ticket Collecter</h1>
+
+  <form action="/platformTicket" method="post">
+    No of Tickets: <input type="number" name="tickets" min="0" value="0" >
+    <br/><h3>Notes:</h3>
+    2000 Rs Notes: <input type="number" name="note_2000" min="0" value="0">
+    <br/>500 Rs Notes: <input type="number" name="note_500" min="0" value="0">
+    <br/> 100 Rs Notes: <input type="number" name="note_100" min="0" value="0">
+    <br/> 50 Rs Notes:  <input type="number" name="note_50" min="0" value="0">
+    <br/> 20 Rs Notes:  <input type="number" name="note_20" min="0" value="0">
+    <br/> 10 Rs Notes:  <input type="number" name="note_10" min="0" value="0">
+    <br/> 5 Rs Notes:   <input type="number" name="note_5" min="0" value="0">
+
+    <h3>Coins:</h3>
+    10 Rs Coins:  <input type="number" name="coin_10" min="0" value="0">
+    <br/> 5 Rs Coins:   <input type="number" name="coin_5" min="0" value="0">
+    <br/> 2 Rs Coins:  <input type="number" name="coin_2" min="0" value="0">
+    <br/> 1 Rs Coins:   <input type="number" name="coin_1" min="0" value="0">
+
+    <br/>
+    <br/> <input type="submit" value="Submit">
+    <br/>
+
+  </form>
+  <br/>
+  <br/>
+
+  <h2>Collect the tickets and the balance amount</h2>
+
+  <table>
+    <tr>
+      <th>Tickets</th>
+      <th>10 Rupee Coins</th>
+      <th>5 Rupee Coins</th>
+      <th>2 Rupee Coins</th>
+      <th>1 Rupee Coins</th>
+    </tr>
+  </table>
+  <br/>
+
+  <script>
+
+  responseTale = document.querySelector("table")
+    fetch("/platformTicket")
+      .then(response => response.json())
+      .then(balanceCoins => {
+        console.log(balanceCoins)
+        row = document.createElement("tr")
+        tickets = document.createElement("td")
+        tickets.innerHTML = balanceCoins.tickets
+        coins_10 = document.createElement("td")
+        coins_10.innerHTML = balanceCoins.coin_10
+        coins_5 = document.createElement("td")
+        coins_5.innerHTML = balanceCoins.coin_5
+        coins_2 = document.createElement("td")
+        coins_2.innerHTML = balanceCoins.coin_2
+        coins_1 = document.createElement("td")
+        coins_1.innerHTML = balanceCoins.coin_1
+
+        row.appendChild(tickets)
+        row.appendChild(coins_10)
+        row.appendChild(coins_5)
+        row.appendChild(coins_2)
+        row.appendChild(coins_1)
+        responseTale.appendChild(row)
+      })
+
+  </script>
+</body>
